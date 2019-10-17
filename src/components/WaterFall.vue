@@ -16,7 +16,7 @@
           class="mx-auto"
           @click="goToDetail(item.id)"
           >
-          <v-img :src="item.cover" :height="item.height" :width="item.width" contain/>
+          <v-img :src="item.cover" :height="item.height" contain/>
           <v-card-text>
               <p class="card-head mb-0">{{item.title}}</p>
           </v-card-text>
@@ -98,6 +98,13 @@ export default {
         this.scale_ratio = 1
       }
 
+      this.items.map(v => {
+        //v.width=768;
+        v.initHeight=v.height;
+        v.height = (v.height * 360 / v.width);
+        v.initHeight = v.height;
+      })
+
       // 针对 iPhoneX 优化
       if (currentInnerWidth == 375) {
         this.gap = 180
@@ -111,10 +118,10 @@ export default {
       } 
         
       this.gap = 400 * this.scale_ratio
-      // this.items.map(v => {
-      //   v.height = v.initHeight * this.scale_ratio
-      //   v.width = 360 * this.scale_ratio
-      // })
+      this.items.map(v => {
+        v.height = v.initHeight * this.scale_ratio
+        v.width = 360 * this.scale_ratio
+      })
     }
   },
   mounted() {

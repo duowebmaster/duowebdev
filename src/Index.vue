@@ -48,6 +48,7 @@ export default {
     for(let i=0; i<config.partner.length; i++) {
       this.items = this.items.concat(config.partner[i].projects);
     }
+    this.items = this.items.reverse();
     let more = Math.min(this.items.length, 10);
     for (let i=0; i<more; i++) {
       this.displayedItems.push(this.items.pop())
