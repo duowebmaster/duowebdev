@@ -45,7 +45,6 @@ export default {
       selectedId: state => state.selectedItem.selectedId
     }),
     title() {
-      console.log(this.displayedItems.find(x => x.id == this.selectedId))
       return this.displayedItems.find(x => x.id == this.selectedId).title
     }
   }

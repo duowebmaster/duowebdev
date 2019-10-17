@@ -70,7 +70,7 @@
       </v-tab-item>
     </v-tabs-items>
     
-    <detail></detail>
+    <detail :displayedItems="displayedItems"></detail>
   </div>
   
 </template>
@@ -78,7 +78,6 @@
 <script>
 import WaterFall from './components/WaterFall'
 import Detail from './Detail'
-import {mapState} from 'vuex'
 import config from "../config.js"
 
 export default {
@@ -98,43 +97,21 @@ export default {
   methods: {
     changePhoto() {
       this.$router.push(`#${this.photo_item}`)
-      let more = Math.min(this.items.length, 10);
-      for (let i=0; i<more; i++) {
-        this.displayedItems.push(this.items.pop())
-      }
       window.scrollTo(0,0)
     },
     listenedScrolled() {
-      this.scrolled=window.scrollY
-      this.viewHeight=window.innerHeight
-      this.bodyHeight=document.body.clientHeight
-      if ( this.scrolled + this.viewHeight > (0.9*this.bodyHeight) ) {
-        let more = Math.min(this.items.length, 10);
-        for (let i=0; i<more; i++) {
-          this.displayedItems.push(this.items.pop())
-        }
-      }
     }
   },
   mounted() {
     for(let i=0; i<config.partner.length; i++) {
       this.items = this.items.concat(config.partner[i].projects);
     }
-    this.items = this.items.reverse();
+    this.displayedItems = this.items;
     this.photo_item=this.$route.hash.replace('#','')
   },
   watch: {
     '$route' (to, from) {
       this.photo_item=to.hash.replace('#','')
-    }
-  },
-  computed: {
-    ...mapState({
-      dialogShow: state => state.dialogShow.detailDialogShow,
-      selectedItem: state => state.selectedItem.selectedItem,
-    }),
-    title() {
-      return this.displayedItems.find(x => x.id == this.$route.hash.replace('#','')).title
     }
   }
 }

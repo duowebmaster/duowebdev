@@ -40,27 +40,15 @@
 <script>
 import DetailWaterFall from './components/DetailWaterFall'
 import { mapState } from 'vuex'
-import projects from './projects/projects'
 export default {
+  props: ["displayedItems"],
   components: {
     DetailWaterFall
   },
   data() {
     return {
-      photo_item:"tab-1",
-      items: ['architecture','urban', 'landscape'],
-      innerItems:[],
+      photo_item:"tab-1"
     }
-  },
-  methods: {
-    changePhoto() {
-      this.$router.push(`#${this.photo_item}`)
-      let more = Math.min(this.items.length, 10);
-      for (let i=0; i<more; i++) {
-        this.displayedItems.push(this.items.pop())
-      }
-      window.scrollTo(0,0)
-    },
   },
   mounted() {
     this.photo_item=this.$route.hash.replace('#','')
@@ -77,7 +65,7 @@ export default {
       selectedId: state => state.selectedItem.selectedId
     }),
     title() {
-      return projects.find(x => x.id == this.selectedId).title
+      return this.displayedItems.find(x => x.id == this.selectedId).title
     }
   }
 }
