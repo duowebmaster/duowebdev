@@ -35,7 +35,7 @@
         <v-container>
           <v-layout row justify-space-between>
             <v-flex xs12>
-              <water-fall ref="arch" v-bind:pushItems="photography_items"></water-fall>
+              <water-fall ref="arch" v-bind:pushItems="displayedItems"></water-fall>
             </v-flex>
           </v-layout>
         </v-container>
@@ -49,7 +49,7 @@
         <v-container>
           <v-layout row justify-space-between>
             <v-flex xs12>
-              <water-fall ref="urban" v-bind:pushItems="photography_items"></water-fall>
+              <water-fall ref="urban" v-bind:pushItems="displayedItems"></water-fall>
             </v-flex>
           </v-layout>
         </v-container>
@@ -63,7 +63,7 @@
         <v-container>
           <v-layout row justify-space-between>
             <v-flex xs12>
-              <water-fall ref="landscape" v-bind:pushItems="photography_items"></water-fall>
+              <water-fall ref="landscape" v-bind:pushItems="displayedItems"></water-fall>
             </v-flex>
           </v-layout>
         </v-container>
@@ -78,9 +78,9 @@
 <script>
 import WaterFall from './components/WaterFall'
 import Detail from './Detail'
-import itemFactory from './tools/ItemFactory'
 import {mapState} from 'vuex'
-import projects from './projects/projects';
+import config from "../config.js"
+
 export default {
   components: {
     WaterFall,
@@ -89,17 +89,19 @@ export default {
   data() {
     return {
       photo_item:"tab-1",
-      items: ['architecture','urban', 'landscape'],
-      order: 1,
-      photography_items: [],
+      tabs: ['architecture','urban', 'landscape'],
+      items: [],
+      displayedItems: [],
+      config: config
     }
   },
   methods: {
     changePhoto() {
-      console.log(this.photo_item)
       this.$router.push(`#${this.photo_item}`)
-      this.order=1
-      this.photography_items=[].concat(itemFactory().get(this.order))
+      let more = Math.min(this.items.length, 10);
+      for (let i=0; i<more; i++) {
+        this.displayedItems.push(this.items.pop())
+      }
       window.scrollTo(0,0)
     },
     listenedScrolled() {
@@ -107,14 +109,18 @@ export default {
       this.viewHeight=window.innerHeight
       this.bodyHeight=document.body.clientHeight
       if ( this.scrolled + this.viewHeight > (0.9*this.bodyHeight) ) {
-        this.order += 1
-        this.photography_items=this.photography_items.concat(itemFactory().get(this.order))
+        let more = Math.min(this.items.length, 10);
+        for (let i=0; i<more; i++) {
+          this.displayedItems.push(this.items.pop())
+        }
       }
     }
   },
   mounted() {
-    this.order=1;
-    this.photography_items=this.photography_items.concat(itemFactory().get(this.order))
+    for(let i=0; i<config.partner.length; i++) {
+      this.items = this.items.concat(config.partner[i].projects);
+    }
+    this.items = this.items.reverse();
     this.photo_item=this.$route.hash.replace('#','')
   },
   watch: {
@@ -128,7 +134,7 @@ export default {
       selectedItem: state => state.selectedItem.selectedItem,
     }),
     title() {
-      return projects.find(x => x.id == this.$route.hash.replace('#','')).title
+      return this.displayedItems.find(x => x.id == this.$route.hash.replace('#','')).title
     }
   }
 }

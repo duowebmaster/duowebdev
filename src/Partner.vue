@@ -17,7 +17,9 @@
     
     <v-tabs-items v-model="photo_item">
       <v-tab-item
-        value="hongguozhuo"
+        v-for="(item, i) in config.partner"
+        :key="i"
+        :value="item.url.replace('#', '')"
         transition="fade"
         reverse-transition="fade"
         lazy
@@ -25,50 +27,19 @@
         <v-container>
           <v-layout row justify-space-between>
             <v-flex xs12>
-              <water-fall v-bind:pushItems="innerItems"></water-fall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-
-      <v-tab-item
-        value="guanyuan"
-        transition="fade"
-        reverse-transition="fade"
-        lazy
-      >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <water-fall v-bind:pushItems="innerItems"></water-fall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-
-      <v-tab-item
-        value="simingwu"
-        transition="fade"
-        reverse-transition="fade"
-        lazy
-      >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <water-fall v-bind:pushItems="innerItems"></water-fall>
+              <water-fall v-bind:pushItems="displayedItems"></water-fall>
             </v-flex>
           </v-layout>
         </v-container>
       </v-tab-item>
     </v-tabs-items>
-    <partner-detail></partner-detail>
+    <partner-detail :displayedItems="displayedItems"></partner-detail>
   </div>
   
 </template>
 
 <script>
 import WaterFall from './components/WaterFall'
-import itemFactory from './tools/ItemFactory'
 import PartnerDetail from './components/PartnerDetail'
 import config from '../config.js'
 
@@ -81,36 +52,39 @@ export default {
   data() {
     return {
       photo_item:"tab-1", 
-      innerItems:[],
-      order: 1,
-      config: config
+      displayedItems: [],
+      config: config,
+      partner: null
     }
   },
   methods: {
     changePhoto() {
       window.scrollTo(0,0)
       this.$router.push(`#${this.photo_item}`)
-      this.order=1
-      this.innerItems=[].concat(itemFactory().get(this.order))
+      this.partner = this.getPartner();
+      this.displayedItems=this.partner.projects
       window.scrollTo(0,0)
     },
     listenedScrolled() {
-      this.scrolled=window.scrollY
-      this.viewHeight=window.innerHeight
-      this.bodyHeight=document.body.clientHeight
-      if ( this.scrolled + this.viewHeight > (0.9*this.bodyHeight) ) {
-        this.order += 1
-        this.innerItems=this.innerItems.concat(itemFactory().get(this.order))
+
+    },
+    getPartner() {
+      for(let i=0; i<this.config.partner.length; i++) {
+        if(this.config.partner[i].url == this.$route.hash) {
+          return this.config.partner[i];
+        }
       }
     }
   },
   mounted() {
-    this.order=1;
-    this.innerItems=this.innerItems.concat(itemFactory().get(this.order))
+    this.partner = this.getPartner();
+    this.displayedItems = this.partner.projects;
     this.photo_item=this.$route.hash.replace('#','')
   },
   watch: {
     '$route' (to, from) {
+      this.partner = this.getPartner();
+      this.displayedItems=this.partner.projects
       this.photo_item=to.hash.replace('#','')
     }
   }

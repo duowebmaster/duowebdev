@@ -30,7 +30,7 @@
           </v-container>
         </v-flex >
         <v-flex xs4>
-          <detail-water-fall></detail-water-fall>
+          <detail-water-fall :displayedItems="displayedItems"></detail-water-fall>
         </v-flex>
       </v-layout>
     </v-card>
@@ -39,7 +39,6 @@
 
 <script>
 import DetailWaterFall from './components/DetailWaterFall'
-import itemFactory from './tools/ItemFactory'
 import { mapState } from 'vuex'
 import projects from './projects/projects'
 export default {
@@ -55,8 +54,12 @@ export default {
   },
   methods: {
     changePhoto() {
+      this.$router.push(`#${this.photo_item}`)
+      let more = Math.min(this.items.length, 10);
+      for (let i=0; i<more; i++) {
+        this.displayedItems.push(this.items.pop())
+      }
       window.scrollTo(0,0)
-      this.innerItems=itemFactory().get(20)
     },
   },
   mounted() {

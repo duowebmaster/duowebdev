@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>
         <div class="dialog-text">{{title}}</div>
-        <div class="dialog-dscrp">{{img.description}}</div>
+        <div class="dialog-dscrp">{{description}}</div>
         <v-spacer></v-spacer>
         <v-menu bottom left>
           <template v-slot:activator="{ on }">
@@ -25,33 +25,13 @@
 </template>
 
 <script>
-import itemFactory from '../tools/ItemFactory'
 import { mapState } from 'vuex'
-import projects from '../projects/projects'
 export default {
-  props: {
-    img: {
-      type: Object, 
-      default(){
-        return {}
-      }
-    }
-  },
+  props: ["displayedItems"],
   data() {
     return {
       photo_item:"tab-1",
-      items: ['architecture','urban', 'landscape'],
-      innerItems:[],
     }
-  },
-  methods: {
-    changePhoto() {
-      window.scrollTo(0,0)
-      this.innerItems=itemFactory().get(20)
-    },
-  },
-  mounted() {
-    this.photo_item=this.$route.hash.replace('#','')
   },
   watch: {
     '$route' (to, from) {
@@ -65,7 +45,8 @@ export default {
       selectedId: state => state.selectedItem.selectedId
     }),
     title() {
-      return projects.find(x => x.id == this.selectedId).title
+      console.log(this.displayedItems.find(x => x.id == this.selectedId))
+      return this.displayedItems.find(x => x.id == this.selectedId).title
     }
   }
 }

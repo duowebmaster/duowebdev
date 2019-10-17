@@ -50,9 +50,6 @@ export default {
     Waterfall,
     WaterfallSlot
   },
-  created(){
-    console.log(this.pushItems)
-  },
   computed: {
     items() {
       return this.pushItems
@@ -63,13 +60,7 @@ export default {
   },
   methods:{
     listendScrolled() {
-      // this.scrolled=window.scrollY
-      // this.viewHeight=window.innerHeight
-      // this.bodyHeight=document.body.clientHeight
-      // if ( this.scrolled + this.viewHeight > (0.9*this.bodyHeight) ) {
-      //   this.order += 1
-      //   this.items=this.items.concat(itemFactory().get(this.order))`
-      // }
+      
     },
     throttleScrolled() {
       return null

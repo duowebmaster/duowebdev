@@ -19,7 +19,6 @@
 <script>
 import Waterfall from "vue-waterfall/lib/waterfall"
 import WaterfallSlot from "vue-waterfall/lib/waterfall-slot"
-import itemFactory from '../tools/ItemFactory'
 import {mapState} from 'vuex'
 import _ from 'lodash'
 export default {
