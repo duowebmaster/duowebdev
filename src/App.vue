@@ -14,6 +14,10 @@
 <script>
 import TopBar from './components/TopBar'
 import MobileTopBar from './components/MobileTopBar'
+
+
+// document.html.style.font = config.font
+
 export default {
   name: 'App',
   components: {

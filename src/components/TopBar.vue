@@ -61,7 +61,7 @@
 
                   <v-list :class="{'before-scrolled': !scrolled&&isIndex}" class="down-menu">
                       <v-list-tile v-for="(item, i) in this.config.partner" :key="i">
-                        <router-link style="z-index: 1000" :to="item.url" >
+                        <router-link style="z-index: 1000" :to="`/partner/${item.url}`" >
                           <v-list-tile-title>{{item.name}}</v-list-tile-title>
                         </router-link>
                       </v-list-tile>

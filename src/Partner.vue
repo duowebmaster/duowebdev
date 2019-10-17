@@ -8,25 +8,9 @@
       @change="changePhoto"
     >
 
-      <v-tab v-for="(item, i) in config" :key="i">
+      <v-tab v-for="(item, i) in config.partner" :key="i" :href="item.url">
         {{item.name}}
       </v-tab>
-
-      <!-- <v-tab
-        href="#hongguozhuo"
-      >
-      HONGGUO ZHUO
-      </v-tab>
-      <v-tab
-        href="#guanyuan"
-      >
-      GUANYUAN
-      </v-tab>
-      <v-tab
-        href="#simingwu"
-      >
-      SIMING WU
-      </v-tab> -->
 
     </v-tabs>
     </v-toolbar>

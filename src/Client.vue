@@ -39,7 +39,7 @@ import config from "../config.js";
 
 export default {
   data() {
-    return {
+      return {
       isMobile: true,
       config: config
     }

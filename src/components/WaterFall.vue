@@ -16,7 +16,7 @@
           class="mx-auto"
           @click="goToDetail(item.id)"
           >
-          <v-img :src="item.src" :height="item.height"  contain />
+          <v-img :src="item.cover" :height="item.height" :width="item.width" contain/>
           <v-card-text>
               <p class="card-head mb-0">{{item.title}}</p>
           </v-card-text>
@@ -49,6 +49,9 @@ export default {
   components: {
     Waterfall,
     WaterfallSlot
+  },
+  created(){
+    console.log(this.pushItems)
   },
   computed: {
     items() {
@@ -108,10 +111,10 @@ export default {
       } 
         
       this.gap = 400 * this.scale_ratio
-      this.items.map(v => {
-        v.height = v.initHeight * this.scale_ratio
-        v.width = 360 * this.scale_ratio
-      })
+      // this.items.map(v => {
+      //   v.height = v.initHeight * this.scale_ratio
+      //   v.width = 360 * this.scale_ratio
+      // })
     }
   },
   mounted() {

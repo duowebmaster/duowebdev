@@ -1,3 +1,7 @@
+import hongguozhuo from './src/projects/hongguozhuo.js'
+import guanyuan from './src/projects/guanyuan.js'
+import simingwu from './src/projects/simingwu.js'
+
 const config = {
     font: "Arial",
     logo: {
@@ -130,43 +134,18 @@ const config = {
     partner: [
         {
             name: "HONGGUO ZHUO",
-            url: "/partner/#hongguozhuo",
-            projects: [
-                {
-                    title: "万科创想公社",
-                    images: [
-                        {
-                            src: "https://raw.githubusercontent.com/duowebmaster/duowebresources/master/5d0BRT2.png",
-                            description: ""
-                        },
-                        {
-                            src: "https://raw.githubusercontent.com/duowebmaster/duowebresources/master/5d0BRT2.png",
-                            description: ""
-                        }
-                    ]
-                },
-                {
-                    title: "从化图书馆",
-                    images: [
-                        "https://raw.githubusercontent.com/duowebmaster/duowebresources/master/5d0BRT2.png",
-                        "https://raw.githubusercontent.com/duowebmaster/duowebresources/master/5d0BRT2.png",
-                    ]
-                }
-            ]
+            url: "#hongguozhuo",
+            projects: hongguozhuo
         },
         {
             name: "GUAN YUAN",
-            url: "/partner/#guanyuan",
-            projects: [
-                
-            ]
+            url: "#guanyuan",
+            projects: guanyuan
         },
         {
             name: "SIMING WU",
-            url: "/partner/#simingwu",
-            projects: [
-                
-            ]
+            url: "#simingwu",
+            projects: simingwu
         }
     ]
     

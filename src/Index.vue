@@ -6,7 +6,7 @@
     <v-container>    
       <v-layout row justify-space-between>
         <v-flex xs12>
-          <water-fall v-bind:pushItems="items"></water-fall>
+          <water-fall :pushItems="displayedItems"></water-fall>
         </v-flex>
       </v-layout>
     </v-container>
@@ -19,7 +19,8 @@
 import Carousal from './components/Carousal'
 import WaterFall from './components/WaterFall'
 import Detail from './Detail'
-import itemFactory from './tools/ItemFactory'
+import config from "../config.js"
+
 export default {
   components: {
     Carousal,
@@ -29,7 +30,7 @@ export default {
   data() {
     return {
       items: [],
-      order: 1
+      displayedItems: []
     }
   },
   computed: {
@@ -44,7 +45,13 @@ export default {
     
   },
   mounted() {
-    this.items=this.items.concat(itemFactory().get(this.order))
+    for(let i=0; i<config.partner.length; i++) {
+      this.items = this.items.concat(config.partner[i].projects);
+    }
+    let more = Math.min(this.items.length, 10);
+    for (let i=0; i<more; i++) {
+      this.displayedItems.push(this.items.pop())
+    }
   },
   methods: {
     listenedScrolled() {
@@ -52,8 +59,10 @@ export default {
       this.viewHeight=window.innerHeight
       this.bodyHeight=document.body.clientHeight
       if ( this.scrolled + this.viewHeight > (0.9*this.bodyHeight) ) {
-        this.order += 1
-        this.items=this.items.concat(itemFactory().get(this.order))
+        let more = Math.min(this.items.length, 10);
+        for (let i=0; i<more; i++) {
+          this.displayedItems.push(this.items.pop())
+        }
       }
     }
   }
