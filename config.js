@@ -1,6 +1,7 @@
 import hongguozhuo from './src/projects/hongguozhuo.js'
 import guanyuan from './src/projects/guanyuan.js'
 import simingwu from './src/projects/simingwu.js'
+import util from './src/util.js'
 
 const config = {
     font: "Arial",
@@ -13,73 +14,73 @@ const config = {
     },
     slides: [
         {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/_DSC3849.jpg',
-            title: '珠江新城'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/_DSC4896.jpg',
-            title: '九分'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/1_1.jpg',
-            title: '梅州古建筑'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/20181028-DSC02628-Edit-3.jpg',
-            title: '广州大剧院'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSC00607.jpg',
-            title: '台北天际线'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3713.jpg',
-            title: '亚洲协会'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3891.jpg',
-            title: '歌剧院'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3925.jpg',
-            title: '营造'
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04741.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04742.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04743.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04748.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%89%A7%E9%99%A2.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E6%A2%85%E5%B7%9E%E5%8F%A4%E5%BB%BA%E7%AD%91.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E6%AD%8C%E5%89%A7%E9%99%A2%20%285%29.jpg?x-oss-process=style/large',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E7%8F%A0%E6%B1%9F%E6%96%B0%E5%9F%8E.jpg',
-            title: ''
-          },
-          {
-            src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E8%90%A5%E9%80%A0.jpg',
-            title: ''
-          }
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/_DSC3849.jpg',
+          title: '珠江新城'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/_DSC4896.jpg',
+          title: '九分'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/1_1.jpg',
+          title: '梅州古建筑'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/20181028-DSC02628-Edit-3.jpg',
+          title: '广州大剧院'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSC00607.jpg',
+          title: '台北天际线'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3713.jpg',
+          title: '亚洲协会'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3891.jpg',
+          title: '歌剧院'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/DSCF3925.jpg',
+          title: '营造'
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04741.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04742.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04743.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/ORG_DSC04748.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E5%B9%BF%E5%B7%9E%E5%A4%A7%E5%89%A7%E9%99%A2.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E6%A2%85%E5%B7%9E%E5%8F%A4%E5%BB%BA%E7%AD%91.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E6%AD%8C%E5%89%A7%E9%99%A2%20%285%29.jpg?x-oss-process=style/large',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E7%8F%A0%E6%B1%9F%E6%96%B0%E5%9F%8E.jpg',
+          title: ''
+        },
+        {
+          src: 'https://duovi.oss-cn-hangzhou.aliyuncs.com/site/image/index/%E8%90%A5%E9%80%A0.jpg',
+          title: ''
+        }
     ],
     profile: {
         content: {

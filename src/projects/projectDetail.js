@@ -1895,4 +1895,6 @@ let projectDetail = [
     ]
   }
 ];
-export default projectDetail;
+
+exports.projectDetail = projectDetail;
+//export default projectDetail;

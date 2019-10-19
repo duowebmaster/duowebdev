@@ -18,11 +18,14 @@ import Store from './store/Store'
 
 import VueImageSwipe from 'vue-image-swipe'
 import 'vue-image-swipe/dist/vue-image-swipe.css'
-Vue.use(VueImageSwipe)
 
+import AsyncComputed from 'vue-async-computed'
+
+Vue.use(VueImageSwipe)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(AsyncComputed)
 
 const routes = [
     { path:'/', component: Index},

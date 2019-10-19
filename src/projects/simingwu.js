@@ -1,4 +1,3 @@
-let simingwu = [
+import util from "../util.js"
 
-]
-export default JSON.parse(JSON.stringify(simingwu));
+export default JSON.parse(util.httpGetSync("").toString());

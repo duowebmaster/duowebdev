@@ -4,8 +4,8 @@
       <v-tabs
       centered
       show-arrows
-      v-model="photo_item"
-      @change="changePhoto"
+      v-model="tab"
+      @change="switchTab"
     >
 
       <v-tab v-for="(item, i) in config.partner" :key="i" :href="item.url">
@@ -15,7 +15,7 @@
     </v-tabs>
     </v-toolbar>
     
-    <v-tabs-items v-model="photo_item">
+    <v-tabs-items v-model="tab">
       <v-tab-item
         v-for="(item, i) in config.partner"
         :key="i"
@@ -51,16 +51,16 @@ export default {
   },
   data() {
     return {
-      photo_item:"tab-1", 
+      tab:"tab-1", 
       displayedItems: [],
       config: config,
       partner: null
     }
   },
   methods: {
-    changePhoto() {
+    switchTab() {
       window.scrollTo(0,0)
-      this.$router.push(`#${this.photo_item}`)
+      this.$router.push(`#${this.tab}`)
       this.partner = this.getPartner();
       this.displayedItems=this.partner.projects
       window.scrollTo(0,0)
@@ -74,18 +74,19 @@ export default {
           return this.config.partner[i];
         }
       }
+    },
+    load() {
+      this.partner = this.getPartner();
+      this.displayedItems = this.partner.projects;
+      this.tab=this.$route.hash.replace('#','')
     }
   },
   mounted() {
-    this.partner = this.getPartner();
-    this.displayedItems = this.partner.projects;
-    this.photo_item=this.$route.hash.replace('#','')
+    this.load()
   },
   watch: {
-    '$route' (to, from) {
-      this.partner = this.getPartner();
-      this.displayedItems=this.partner.projects
-      this.photo_item=to.hash.replace('#','')
+    '$route' () {
+      this.load()
     }
   }
 }

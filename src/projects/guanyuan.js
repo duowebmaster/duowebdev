@@ -1,4 +1,3 @@
-let guanyuan = [
+import util from "../util.js"
 
-]
-export default JSON.parse(JSON.stringify(guanyuan));
+export default JSON.parse(util.httpGetSync("").toString());

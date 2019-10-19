@@ -36,29 +36,29 @@
 
 <script>
 import config from "../config.js";
+import Axios from 'axios';
 
 export default {
   data() {
-      return {
+    return {
       isMobile: true,
       config: config
     }
   },
-  computed: {
-    content: function() {
-      let xhr = new XMLHttpRequest();
-      xhr.open("get", config.profile.content.src, false);
-      xhr.onreadystatechange = () => {
-        if(xhr.readyState == 4){
-          if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-            return
+  asyncComputed: {
+    content: {
+      get() {
+        return Axios.get(config.profile.content.src).then(rsp => {
+          if(rsp.status >= 200 && rsp.status < 300) {
+            return rsp.data;
           } else {
-            xhr.responseText = "Network Error"
+            return "Network Error";
           }
-        }
-      }
-      xhr.send();
-      return xhr.responseText;
+        }).catch(err => {
+          return err;
+        })
+      },
+      default: ""
     }
   }
 }
