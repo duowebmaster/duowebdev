@@ -1,12 +1,9 @@
 <template>
   <div>
-    <waterfall :line-gap="gap" :watch="items" v-resize="justifyCard" v-scroll="justifyCard">
-      <!-- each component is wrapped by a waterfall slot -->
-      <waterfall-slot
-        v-for="(item, index) in items"
-        :width="item.width + widthHolder"
-        :height="item.height + heightHolder"
-        :order="index"
+    <Waterfall :gutterWidth="20" :gutterHeight="20" v-if="displayedItems.length != 0">
+      <WaterfallItem
+        v-for="(item, index) in displayedItems"
+        :width="360"
         :key="index"
       >
       <v-hover>
@@ -15,60 +12,35 @@
           :class="`elevation-${hover ? 8 : 2}`"
           class="mx-auto"
           @click="goToDetail(item.id)"
-          >
-          <v-img :src="item.cover" :height="item.height" contain/>
+        >
+          <v-img :src="item.cover" contain/>
           <v-card-text>
               <p class="card-head mb-0">{{item.title}}</p>
           </v-card-text>
           </v-card>
         </v-hover>
-      </waterfall-slot>
-    </waterfall>
+      </WaterfallItem>
+    </Waterfall>
   </div>
 </template>
 
 <script>
-import Waterfall from "vue-waterfall/lib/waterfall"
-import WaterfallSlot from "vue-waterfall/lib/waterfall-slot"
+import {Waterfall, WaterfallItem} from 'vue2-waterfall';
+
 import _ from 'lodash'
 import projectDetail from '../projects/projectDetail';
 export default {
-  props: ['pushItems'],
-  data() {
-    return {
-      scrolled: 0,
-      initHeight: 0,
-      bodyHeight: 0,
-      widthHolder: 40,
-      order: 1,
-      heightHolder: 76,
-      gap: 400,
-      scale_ratio: 1,
-    }
-  },
+  props: ['items'],
   components: {
     Waterfall,
-    WaterfallSlot
+    WaterfallItem
   },
   computed: {
-    items() {
-      return this.pushItems
+    displayedItems() {
+      return this.items;
     }
   },
-  updated() {
-    this.justifyCard()
-  },
   methods:{
-    listendScrolled() {
-      
-    },
-    throttleScrolled() {
-      return null
-    },
-    throttleResize() {
-      return null
-    },
-    
     goToDetail(id){
       this.$store.commit("changeProjectItems", projectDetail.find(x=> x.id == id).details)
       this.$store.commit("changeSelectedId", id)
@@ -78,49 +50,7 @@ export default {
       } else {
         this.$router.push('/view')
       }
-      
-    },
-    justifyCard() {
-      let currentInnerWidth = window.innerWidth;
-      if (currentInnerWidth < 820) {
-        this.scale_ratio = Math.floor(currentInnerWidth / 820 * 1000 - 5) / 1000;  
-      }
-      if (currentInnerWidth > 820) {
-        this.scale_ratio = 1
-      }
-
-      this.items.map(v => {
-        //v.width=768;
-        v.initHeight=v.height;
-        v.height = (v.height * 360 / v.width);
-        v.initHeight = v.height;
-      })
-
-      // 针对 iPhoneX 优化
-      if (currentInnerWidth == 375) {
-        this.gap = 180
-        this.items.map(v => {
-          v.height = v.initHeight* 160/360
-          v.width = 160
-        })
-        this.widthHolder = 20
-        this.heightHolder = 45
-        return 0
-      } 
-        
-      this.gap = 400 * this.scale_ratio
-      this.items.map(v => {
-        v.height = v.initHeight * this.scale_ratio
-        v.width = 360 * this.scale_ratio
-      })
     }
-  },
-  mounted() {
-    this.justifyCard()
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.throttleScrolled)
-    window.removeEventListener('resize', this.throttleResize)
   }
 }
 </script>

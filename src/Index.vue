@@ -6,7 +6,7 @@
     <v-container>    
       <v-layout row justify-space-between>
         <v-flex xs12>
-          <water-fall :pushItems="displayedItems"></water-fall>
+          <water-fall :items="displayedItems"></water-fall>
         </v-flex>
       </v-layout>
     </v-container>

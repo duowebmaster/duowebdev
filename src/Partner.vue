@@ -1,5 +1,5 @@
 <template>
-  <div class="photography-wrapper" v-scroll="listenedScrolled">
+  <div class="photography-wrapper">
     <v-toolbar fixed class="tab-fix">
       <v-tabs
       centered
@@ -7,7 +7,6 @@
       v-model="tab"
       @change="switchTab"
     >
-
       <v-tab v-for="(item, i) in config.partner" :key="i" :href="item.url">
         {{item.name}}
       </v-tab>
@@ -27,27 +26,24 @@
         <v-container>
           <v-layout row justify-space-between>
             <v-flex xs12>
-              <water-fall v-bind:pushItems="displayedItems"></water-fall>
+              <MyWaterFall :items="displayedItems"></MyWaterFall>
             </v-flex>
           </v-layout>
         </v-container>
       </v-tab-item>
     </v-tabs-items>
-    <partner-detail :displayedItems="displayedItems"></partner-detail>
   </div>
   
 </template>
 
 <script>
-import WaterFall from './components/WaterFall'
-import PartnerDetail from './components/PartnerDetail'
+import MyWaterFall from './components/WaterFall'
 import config from '../config.js'
 
 
 export default {
   components: {
-    WaterFall,
-    PartnerDetail
+    MyWaterFall
   },
   data() {
     return {
@@ -59,14 +55,7 @@ export default {
   },
   methods: {
     switchTab() {
-      window.scrollTo(0,0)
       this.$router.push(`#${this.tab}`)
-      this.partner = this.getPartner();
-      this.displayedItems=this.partner.projects
-      window.scrollTo(0,0)
-    },
-    listenedScrolled() {
-
     },
     getPartner() {
       for(let i=0; i<this.config.partner.length; i++) {

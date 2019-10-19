@@ -1,7 +1,6 @@
 import hongguozhuo from './src/projects/hongguozhuo.js'
 import guanyuan from './src/projects/guanyuan.js'
 import simingwu from './src/projects/simingwu.js'
-import util from './src/util.js'
 
 const config = {
     font: "Arial",
