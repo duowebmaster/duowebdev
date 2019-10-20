@@ -10,7 +10,6 @@ import Index from './Index'
 import Team from './components/Team'
 import Partner from './Partner'
 import Motion from './Motion'
-import ImageView from './components/ImageView'
 import Client from './Client'
 import Article from './components/Article'
 
@@ -28,7 +27,7 @@ Vue.use(Vuex)
 Vue.use(AsyncComputed)
 
 const routes = [
-    { path:'/', component: Index},
+    { path:'/', component: Index}, 
     { path: '/photography', component: Photography,
       children: [
         {
@@ -49,10 +48,7 @@ const routes = [
     { path: '/partner', component: Partner},
     { path: '/detail', component: Photography},
     { path: '/motion', component: Motion},
-    { path: '/client', component: Client},
-    { path: '/view', components: {
-      imageView:ImageView
-    }}
+    { path: '/client', component: Client}
 ]
 const store = new Vuex.Store(Store)
 

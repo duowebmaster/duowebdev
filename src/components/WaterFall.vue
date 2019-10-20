@@ -29,6 +29,7 @@ import {Waterfall, WaterfallItem} from 'vue2-waterfall';
 
 import _ from 'lodash'
 import projectDetail from '../projects/projectDetail';
+
 export default {
   props: ['items'],
   components: {

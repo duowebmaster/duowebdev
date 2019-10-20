@@ -6,7 +6,7 @@
     <v-container>    
       <v-layout row justify-space-between>
         <v-flex xs12>
-          <water-fall :items="displayedItems"></water-fall>
+          <MyWaterFall :items="displayedItems"></MyWaterFall>
         </v-flex>
       </v-layout>
     </v-container>
@@ -17,15 +17,13 @@
 
 <script>
 import Carousal from './components/Carousal'
-import WaterFall from './components/WaterFall'
-import Detail from './Detail'
+import MyWaterFall from './components/WaterFall'
 import config from "../config.js"
 
 export default {
   components: {
     Carousal,
-    WaterFall,
-    Detail
+    MyWaterFall
   },
   data() {
     return {

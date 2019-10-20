@@ -14,24 +14,7 @@
     </v-tabs>
     </v-toolbar>
     
-    <v-tabs-items v-model="tab">
-      <v-tab-item
-        v-for="(item, i) in config.partner"
-        :key="i"
-        :value="item.url.replace('#', '')"
-        transition="fade"
-        reverse-transition="fade"
-        lazy
-      >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <MyWaterFall :items="displayedItems"></MyWaterFall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-    </v-tabs-items>
+    <MyWaterFall :items="displayedItems"></MyWaterFall>
   </div>
   
 </template>

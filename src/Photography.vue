@@ -25,65 +25,18 @@
 
     </v-tabs>
     </v-toolbar>
-    <v-tabs-items v-model="photo_item">
-      <v-tab-item
-        value="architecture"
-        transition="fade"
-        reverse-transition="fade"
-        lazy
-      >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <water-fall ref="arch" v-bind:pushItems="displayedItems"></water-fall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item
-        value="urban"
-        transition="fade"
-        reverse-transition="fade"
-        lazy
-      >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <water-fall ref="urban" v-bind:pushItems="displayedItems"></water-fall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-      <v-tab-item
-          value="landscape"
-          transition="fade"
-          reverse-transition="fade"
-          lazy
-        >
-        <v-container>
-          <v-layout row justify-space-between>
-            <v-flex xs12>
-              <water-fall ref="landscape" v-bind:pushItems="displayedItems"></water-fall>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-tab-item>
-    </v-tabs-items>
-    
-    <detail :displayedItems="displayedItems"></detail>
+    <MyWaterFall :items="displayedItems"></MyWaterFall>
   </div>
   
 </template>
 
 <script>
-import WaterFall from './components/WaterFall'
-import Detail from './Detail'
+import MyWaterFall from './components/WaterFall'
 import config from "../config.js"
 
 export default {
   components: {
-    WaterFall,
-    Detail
+    MyWaterFall
   },
   data() {
     return {

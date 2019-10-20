@@ -37,8 +37,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+
 export default {
+  props: ["item"],
   data() {
     return {
       dialog: true,
@@ -47,22 +48,12 @@ export default {
   },
   methods:{
     inputNewValue(i) {
-
       this.currentIndex = i
     },
     prevRoute() {
       this.$router.go(-1)
     }
-  },
-  mounted() {
-  },
-
-  computed: {
-    ...mapState({
-      items: state => state.projectItems.projectItems
-    })
   }
-
 }
 </script>
 

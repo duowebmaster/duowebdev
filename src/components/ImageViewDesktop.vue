@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="outer">
+    <div class="inner">
     
+    </div>
 
 
   </div>  
@@ -14,5 +16,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .outer {
+    
+  }
+  .inner {
+    
+  }
 </style>
