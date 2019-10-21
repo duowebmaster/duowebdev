@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  props: ["item"],
+  props: ["items"],
   data() {
     return {
       dialog: true,

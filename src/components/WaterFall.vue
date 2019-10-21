@@ -1,8 +1,9 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" :width="800">
+    <v-dialog v-if="!mobile" v-model="dialog" :width="800">
       <ImageViewDesktop v-if="selectedItem" :item="selectedItem"></ImageViewDesktop>
     </v-dialog>
+    <ImageViewMobile v-if="mobile && selectedItem" :items="selectedItem.detail"></ImageViewMobile>
     <Waterfall :gutterWidth="20" :gutterHeight="20" v-if="displayedItems.length != 0">
       <WaterfallItem v-for="(item, index) in displayedItems" :width="360" :key="index">
         <v-hover>
@@ -25,7 +26,9 @@
 
 <script>
 import { Waterfall, WaterfallItem } from "vue2-waterfall";
+import { isMobile } from "mobile-device-detect";
 import ImageViewDesktop from "./ImageViewDesktop";
+import ImageViewMobile from "./ImageViewMobile";
 
 import _ from "lodash";
 
@@ -40,11 +43,15 @@ export default {
   components: {
     Waterfall,
     WaterfallItem,
-    ImageViewDesktop
+    ImageViewDesktop,
+    ImageViewMobile
   },
   computed: {
     displayedItems() {
       return this.items;
+    },
+    mobile() {
+      return isMobile;
     }
   },
   loaded() {},

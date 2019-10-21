@@ -13,6 +13,7 @@
     "lingallery": "^1.3.0",
     "lodash": "^4.17.15",
     "markdown-it": "^8.4.2",
+    "mobile-device-detect": "^0.3.3",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.6.10",

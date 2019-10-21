@@ -2,7 +2,6 @@ import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import Vuex from 'vuex'
 
 import Story from './components/Story'
 import Photography from './Photography'
@@ -13,8 +12,6 @@ import Motion from './Motion'
 import Client from './Client'
 import Article from './components/Article'
 
-import Store from './store/Store'
-
 import VueImageSwipe from 'vue-image-swipe'
 import 'vue-image-swipe/dist/vue-image-swipe.css'
 
@@ -23,7 +20,6 @@ import AsyncComputed from 'vue-async-computed'
 Vue.use(VueImageSwipe)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
-Vue.use(Vuex)
 Vue.use(AsyncComputed)
 
 
@@ -53,7 +49,6 @@ const routes = [
   { path: '/motion', component: Motion },
   { path: '/client', component: Client }
 ]
-const store = new Vuex.Store(Store)
 
 const router = new VueRouter({
   mode: 'history',
@@ -62,6 +57,5 @@ const router = new VueRouter({
 
 new Vue({
   render: h => h(App),
-  router,
-  store
+  router
 }).$mount('#app')
