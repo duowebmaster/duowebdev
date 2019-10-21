@@ -26,34 +26,37 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(AsyncComputed)
 
+
 const routes = [
-    { path:'/', component: Index}, 
-    { path: '/photography', component: Photography,
-      children: [
-        {
-          path: 'detail',
-          component: undefined
-        }
-      ]
-    },
-    { path: '/story', component: Story,
-      children: [
-        {
-          path: 'article',
-          component: Article
-        }
-      ]
-    },
-    { path: '/team', component: Team},
-    { path: '/partner', component: Partner},
-    { path: '/detail', component: Photography},
-    { path: '/motion', component: Motion},
-    { path: '/client', component: Client}
+  { path: '/', component: Index },
+  {
+    path: '/photography', component: Photography,
+    children: [
+      {
+        path: 'detail',
+        component: undefined
+      }
+    ]
+  },
+  {
+    path: '/story', component: Story,
+    children: [
+      {
+        path: 'article',
+        component: Article
+      }
+    ]
+  },
+  { path: '/team', component: Team },
+  { path: '/partner', component: Partner },
+  { path: '/detail', component: Photography },
+  { path: '/motion', component: Motion },
+  { path: '/client', component: Client }
 ]
 const store = new Vuex.Store(Store)
 
 const router = new VueRouter({
-  mode:'history',
+  mode: 'history',
   routes
 })
 
