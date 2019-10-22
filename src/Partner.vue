@@ -20,10 +20,10 @@ export default {
   },
   data() {
     return {
-      tab: "tab-1",
+      tab: "",
       displayedItems: [],
       config: config,
-      partner: null
+      partner: undefined
     };
   },
   methods: {
@@ -44,10 +44,16 @@ export default {
     }
   },
   mounted() {
+    if (this.$route.hash == "") {
+      this.$router.push({ hash: "#hongguozhuo" });
+    }
     this.load();
   },
   watch: {
     $route() {
+      if (this.$route.hash == "") {
+        this.$router.push({ hash: "#hongguozhuo" });
+      }
       this.load();
     }
   }

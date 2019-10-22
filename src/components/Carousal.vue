@@ -1,84 +1,74 @@
 <template>
   <div>
-    <v-carousel
-      hide-delimiters
-      class="fixed-carousel"
-    >
-      <v-carousel-item
-        v-for="(item,i) in config.slides"
-        :key="i"
-        :src="item.src"
-      >
-      </v-carousel-item>
+    <v-carousel hide-delimiters class="fixed-carousel">
+      <v-carousel-item v-for="(item,i) in config.slides" :key="i" :src="item.src"></v-carousel-item>
     </v-carousel>
   </div>
 </template>
 
 <script>
-
-import config from "../../config.js"
+import config from "../../config.js";
 
 export default {
-  data () {
+  data() {
     return {
       config: config
-    }
+    };
   },
   methods: {
     goToDetail() {
-      this.$router.push('detail')
+      this.$router.push("detail");
     }
   },
   computed: {
     fullHeight() {
-      if (window.innerWidth > 1025){
+      if (window.innerWidth > 1025) {
         return window.innerHeight;
       } else {
         return 500;
       }
-    },
+    }
   }
-}
+};
 </script>
 
 <style scoped>
-
 .v-card--reveal {
   align-items: center;
   bottom: 0;
   justify-content: center;
-  opacity: .5;
+  opacity: 0.5;
   position: absolute;
   width: 100%;
 }
-@media(min-width: 1026px){
-  .fixed-carousel{
+@media (min-width: 1026px) {
+  .fixed-carousel {
     z-index: 0;
     position: fixed;
   }
   .v-carousel {
     height: 100vh !important;
-  } 
+  }
 }
-@media(max-width: 1025px) {
+@media (max-width: 1025px) {
   /* .fixed-carousel{
     z-index: 0;
     position: fixed;
   } */
   .v-carousel {
     height: 30vh !important;
-  } 
+  }
 }
 
-.fullHeight{
+.fullHeight {
   height: 100%;
-  color: white
+  color: white;
 }
 a {
   display: block;
   width: 100%;
 }
-h1{
+h1 {
   text-align: center;
   display: block;
   width: 100%;
@@ -86,7 +76,7 @@ h1{
   padding: 10px 0;
   background-color: rgba(0, 0, 0, 0.5);
 }
-h4{
-  color: white
+h4 {
+  color: white;
 }
 </style>

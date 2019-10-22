@@ -22,14 +22,6 @@
               :style="this.config.profile.clients.style"
             />
           </v-layout>
-          <!-- <v-layout row justify-space-between wrap fill-height>
-            <v-flex v-bind="{[`xs4`]:!isMobile,[`xs6`]:isMobile}" style="text-align: center">
-              <img
-                :src="this.config.profile.clients.src"
-                :style="this.config.profile.clients.style"
-              />
-            </v-flex>
-          </v-layout>-->
         </v-container>
       </v-flex>
     </v-layout>

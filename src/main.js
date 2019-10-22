@@ -17,11 +17,12 @@ import 'vue-image-swipe/dist/vue-image-swipe.css'
 
 import AsyncComputed from 'vue-async-computed'
 
+import config from '../config.js'
+
 Vue.use(VueImageSwipe)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(AsyncComputed)
-
 
 const routes = [
   { path: '/', component: Index },
@@ -52,6 +53,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
+  base: config.baseurl,
   routes
 })
 

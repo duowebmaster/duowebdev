@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     listendScrolled(e) {
-      scroll = window.scrollY;
+      let scroll = window.scrollY;
       if (scroll > 100) {
         this.scrolled = true;
       } else {
@@ -114,7 +114,7 @@ export default {
       }
     },
     toPhotography() {
-      this.$router.push({ path: "photography" });
+      this.$router.push({ path: "/photography" });
     },
     handleRouteChange() {
       if (this.$route.path == "/") {

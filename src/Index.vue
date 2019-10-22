@@ -80,4 +80,7 @@ export default {
 .v-content__wrap {
   background-color: #fafafa;
 }
+html {
+  touch-action: manipulation;
+}
 </style>

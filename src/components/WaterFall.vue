@@ -1,11 +1,26 @@
 <template>
-  <div>
+  <div style="margin-top: 40px">
     <v-dialog v-if="!mobile" v-model="dialog" :width="800">
       <ImageViewDesktop v-if="selectedItem" :item="selectedItem"></ImageViewDesktop>
     </v-dialog>
-    <ImageViewMobile v-if="mobile && selectedItem" :items="selectedItem.detail"></ImageViewMobile>
+    <v-dialog
+      v-if="mobile"
+      v-model="dialog"
+      width="100%"
+      height="100%"
+      content-class="image_dialog"
+      fullscreen
+    >
+      <ImageViewMobile v-if="selectedItem" :items="selectedItem.detail"></ImageViewMobile>
+      <div class="button-wrapper">
+        <v-btn flat icon dark large color="black" @click="dialog = false">
+          <v-icon dark>close</v-icon>
+        </v-btn>
+      </div>
+    </v-dialog>
+
     <Waterfall :gutterWidth="20" :gutterHeight="20" v-if="displayedItems.length != 0">
-      <WaterfallItem v-for="(item, index) in displayedItems" :width="360" :key="index">
+      <WaterfallItem v-for="(item, index) in displayedItems" :width="300" :key="index">
         <v-hover>
           <v-card
             slot-scope="{ hover }"
@@ -104,5 +119,10 @@ export default {
   .vue-waterfall-slot {
     padding: 5px 10px;
   }
+}
+.image_dialog {
+  height: 100% !important;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
 }
 </style>
