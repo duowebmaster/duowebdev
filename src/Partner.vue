@@ -45,14 +45,14 @@ export default {
   },
   mounted() {
     if (this.$route.hash == "") {
-      this.$router.push({ hash: "#hongguozhuo" });
+      this.$router.push({ hash: this.config.partner[0].url });
     }
     this.load();
   },
   watch: {
     $route() {
       if (this.$route.hash == "") {
-        this.$router.push({ hash: "#hongguozhuo" });
+        this.$router.push({ hash: this.config.partner[0].url });
       }
       this.load();
     }

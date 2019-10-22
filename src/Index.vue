@@ -83,4 +83,9 @@ export default {
 html {
   touch-action: manipulation;
 }
+@media (max-width: 960px) {
+  .tab-fix {
+    top: 30px;
+  }
+}
 </style>
