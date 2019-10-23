@@ -1,12 +1,11 @@
 <template>
-  <div class="photography-wrapper" v-scroll="listenedScrolled">
+  <div class="photography-wrapper">
     <v-toolbar fixed class="tab-fix">
-      <v-tabs centered show-arrows v-model="photo_item" @change="changePhoto">
-        <v-tab href="#architecture">Architecture</v-tab>
-        <v-tab href="#urban">Urban</v-tab>
-        <v-tab href="#landscape">Landscape</v-tab>
+      <v-tabs centered show-arrows v-model="tabName" @change="switchTab">
+        <v-tab v-for="(item, i) in config.photography" :key="i" :href="item.url">{{item.name}}</v-tab>
       </v-tabs>
     </v-toolbar>
+
     <MyWaterFall :items="displayedItems"></MyWaterFall>
   </div>
 </template>
@@ -21,30 +20,41 @@ export default {
   },
   data() {
     return {
-      photo_item: "tab-1",
-      tabs: ["architecture", "urban", "landscape"],
-      items: [],
+      tabName: "",
       displayedItems: [],
-      config: config
+      config: config,
+      tab: undefined
     };
   },
   methods: {
-    changePhoto() {
-      this.$router.push(`#${this.photo_item}`);
-      window.scrollTo(0, 0);
+    switchTab() {
+      this.$router.push(`#${this.tabName}`);
     },
-    listenedScrolled() {}
+    getTab() {
+      for (let i = 0; i < this.config.photography.length; i++) {
+        if (this.config.photography[i].url == this.$route.hash) {
+          return this.config.photography[i];
+        }
+      }
+    },
+    load() {
+      this.tab = this.getTab();
+      this.displayedItems = this.tab.projects;
+      this.tabName = this.$route.hash.replace("#", "");
+    }
   },
   mounted() {
-    for (let i = 0; i < config.partner.length; i++) {
-      this.items = this.items.concat(config.partner[i].projects);
+    if (this.$route.hash == "") {
+      this.$router.push({ hash: this.config.photography[0].url });
     }
-    this.displayedItems = this.items;
-    this.photo_item = this.$route.hash.replace("#", "");
+    this.load();
   },
   watch: {
-    $route(to, from) {
-      this.photo_item = to.hash.replace("#", "");
+    $route() {
+      if (this.$route.hash == "") {
+        this.$router.push({ hash: this.config.photography[0].url });
+      }
+      this.load();
     }
   }
 };
@@ -53,14 +63,5 @@ export default {
 <style scoped>
 .photography-wrapper {
   margin-top: 100px;
-}
-.dialog-text {
-  font-size: 22px;
-  padding-left: 50px;
-}
-</style>
-<style>
-.v-dialog__content > .v-dialog {
-  height: 780px;
 }
 </style>

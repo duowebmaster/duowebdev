@@ -1,7 +1,7 @@
 <template>
   <div class="photography-wrapper">
     <v-toolbar fixed class="tab-fix">
-      <v-tabs centered show-arrows v-model="tab" @change="switchTab">
+      <v-tabs centered show-arrows v-model="tabName" @change="switchTab">
         <v-tab v-for="(item, i) in config.partner" :key="i" :href="item.url">{{item.name}}</v-tab>
       </v-tabs>
     </v-toolbar>
@@ -20,17 +20,17 @@ export default {
   },
   data() {
     return {
-      tab: "",
+      tabName: "",
       displayedItems: [],
       config: config,
-      partner: undefined
+      tab: undefined
     };
   },
   methods: {
     switchTab() {
-      this.$router.push(`#${this.tab}`);
+      this.$router.push(`#${this.tabName}`);
     },
-    getPartner() {
+    getTab() {
       for (let i = 0; i < this.config.partner.length; i++) {
         if (this.config.partner[i].url == this.$route.hash) {
           return this.config.partner[i];
@@ -38,9 +38,9 @@ export default {
       }
     },
     load() {
-      this.partner = this.getPartner();
-      this.displayedItems = this.partner.projects;
-      this.tab = this.$route.hash.replace("#", "");
+      this.tab = this.getTab();
+      this.displayedItems = this.tab.projects;
+      this.tabName = this.$route.hash.replace("#", "");
     }
   },
   mounted() {

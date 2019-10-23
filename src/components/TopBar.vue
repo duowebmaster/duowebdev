@@ -28,19 +28,9 @@
                       </v-card-text>
                     </template>
                     <v-list :class="{'before-scrolled': !scrolled&&isIndex}" class="down-menu">
-                      <v-list-tile>
-                        <router-link style="z-index: 1000" to="/photography/#architecture">
-                          <v-list-tile-title>ARCHITECTURE</v-list-tile-title>
-                        </router-link>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <router-link style="z-index: 1000" to="/photography/#urban">
-                          <v-list-tile-title>URBAN</v-list-tile-title>
-                        </router-link>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <router-link style="z-index: 1000" to="/photography/#landscape">
-                          <v-list-tile-title>LANDSCAPE</v-list-tile-title>
+                      <v-list-tile v-for="(item, i) in config.photography" :key="i">
+                        <router-link style="z-index: 1000" :to="`/photography/${item.url}`">
+                          <v-list-tile-title>{{item.name}}</v-list-tile-title>
                         </router-link>
                       </v-list-tile>
                     </v-list>
