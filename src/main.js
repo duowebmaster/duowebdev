@@ -18,6 +18,20 @@ import 'vue-image-swipe/dist/vue-image-swipe.css'
 import AsyncComputed from 'vue-async-computed'
 
 import config from '../config.js'
+import util from './util.js'
+
+let dynamic_config = JSON.parse(util.httpGetSync(config.config_url).toString());
+Object.keys(dynamic_config).map((k) => {
+  config[k] = dynamic_config[k];
+})
+
+for (let i = 0; i < config.photography.length; i++) {
+  config.photography[i].projects = JSON.parse(util.httpGetSync(config.photography[i].projects).toString());
+}
+
+for (let i = 0; i < config.partner.length; i++) {
+  config.partner[i].projects = JSON.parse(util.httpGetSync(config.partner[i].projects).toString());
+}
 
 Vue.use(VueImageSwipe)
 Vue.config.productionTip = false
