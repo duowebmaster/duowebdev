@@ -5,7 +5,7 @@
         <v-layout row justify-space-between>
           <v-flex>
             <router-link style="z-index: 1000" to="/">
-              <v-img id="logo" :src="config.logo.src" :style="config.logo.style" />
+              <v-card-text v-on="on" class="header">DUO 建筑影像工作室</v-card-text>
             </router-link>
           </v-flex>
           <v-spacer></v-spacer>

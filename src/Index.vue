@@ -1,5 +1,6 @@
 <template>
   <div v-scroll="listenedScrolled">
+    <img :src="config.logo.src" class="logo-img" />
     <carousal />
     <div :style="holderStyle" class="holder-div"></div>
     <v-content>
@@ -27,7 +28,8 @@ export default {
   data() {
     return {
       items: [],
-      displayedItems: []
+      displayedItems: [],
+      config: config
     };
   },
   computed: {
@@ -86,6 +88,30 @@ html {
 @media (max-width: 960px) {
   .tab-fix {
     top: 30px;
+  }
+}
+.logo-img {
+  position: absolute;
+  z-index: 1;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 30vh;
+  height: 30vh;
+}
+.logo {
+  position: relative;
+}
+@media (max-width: 1025px) {
+  .logo-img {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 10vh;
+    width: 200px;
+    height: 10vh;
+    z-index: 1;
   }
 }
 </style>

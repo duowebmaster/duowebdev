@@ -41,6 +41,7 @@ export default {
   position: absolute;
   width: 100%;
 }
+
 @media (min-width: 1026px) {
   .fixed-carousel {
     z-index: 0;
